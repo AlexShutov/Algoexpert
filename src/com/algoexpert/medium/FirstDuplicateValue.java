@@ -1,17 +1,29 @@
 package com.algoexpert.medium;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class FirstDuplicateValue {
-
     public static void main(String[] args) {
+        System.out.println("test test");
     }
 
     public int firstDuplicateValue(int[] array) {
-        int[] indicies = new int[array.length + 1];
+        Set<Integer> visited = new TreeSet<>();
         for (int value: array) {
-            int index = value;
+            if (visited.contains(value)) {
+                return value;
+            } else {
+                visited.add(value);
+            }
+        }
+        return -1;
+    }
+
+    public int firstDuplicateValue2(int[] array) {
+        int[] indicies = new int[array.length];
+        for (int value: array) {
+            int index = value -1;
             if (indicies[index] != 0) {
                 return value;
             } else {
