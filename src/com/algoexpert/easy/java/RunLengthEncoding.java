@@ -1,4 +1,4 @@
-package com.algoexpert.easy;
+package com.algoexpert.easy.java;
 
 public class RunLengthEncoding {
     public static void main(String[] args) {
