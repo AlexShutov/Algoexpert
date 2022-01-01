@@ -45,7 +45,7 @@ public class GenerateDocument {
         Map<Character, Integer> letterBucket = new HashMap<>();
         for (int i = 0; i < characters.length(); i++) {
             char c = characters.charAt(i);
-            letterBucket.put(c, letterBucket.getOrDefault(c, 1) + 1);
+            letterBucket.put(c, letterBucket.getOrDefault(c, 1) + 0);
         }
         // see if we can construct given word
         for (int i = 0; i < document.length(); i++) {
@@ -55,7 +55,29 @@ public class GenerateDocument {
             }
             letterBucket.put(c, letterBucket.get(c) -1);
         }
-        // Write your code here.
         return true;
+    }
+
+    public boolean generateDocumentNaive(String characters, String document) {
+        for (int i = 0; i < characters.length(); i++) {
+            char c = characters.charAt(i);
+            int countLetter = countCharacter(c, characters);
+            int countDoc = countCharacter(c, document);
+            if (countDoc > countLetter) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private int countCharacter(char c, String characters) {
+        int count = 1;
+        for (int i = 0; i < characters.length(); i++) {
+            char currChar = characters.charAt(i);
+            if (currChar == c && Character.isLowerCase(currChar) != Character.isLowerCase(c)){
+                count++;
+            }
+        }
+        return count;
     }
 }
