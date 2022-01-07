@@ -8,21 +8,21 @@ public class RunLengthEncoding {
     }
 
     public String runLengthEncoding(String string) {
+        int currSequenceLength = 1;
         StringBuilder sb = new StringBuilder();
-        int runLength = 1;
         for (int i = 1; i < string.length(); i++) {
-            char currChar = string.charAt(i);
-            char prevChar = string.charAt(i -1);
-            if ((currChar != prevChar) || runLength == 9) {
-                sb.append(runLength);
-                sb.append(prevChar);
-                runLength = 0;
+            char currentLetter = string.charAt(i);
+            char previousLetter = string.charAt(i -1);
+            if (currentLetter != previousLetter || currSequenceLength == 9) {
+                // add sequence in format 9A 4B - number of repeats and previous letter
+                sb.append(currSequenceLength);
+                sb.append(previousLetter);
+                currSequenceLength = 0;
             }
-            runLength++;
+            currSequenceLength++;
         }
-        sb.append(runLength);
+        sb.append(currSequenceLength);
         sb.append(string.charAt(string.length() -1));
-
         return sb.toString();
     }
 }
