@@ -1,6 +1,9 @@
 package com.algoexpert.medium;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Staircasetraversal {
 
     public static void main(String[] args) {
@@ -12,7 +15,7 @@ public class Staircasetraversal {
     }
 
     // Not optimal solution
-    public int staircaseTraversalSmiple(int height, int maxSteps) {
+    public int staircaseTraversalSimple(int height, int maxSteps) {
         return numberOfWays(height, maxSteps);
     }
 
@@ -28,8 +31,9 @@ public class Staircasetraversal {
 
         return result;
     }
+
     // Solution with dynamic programming
-    public int staircaseTraversal(int height, int maxSteps) {
+    public int staircaseTraversalArray(int height, int maxSteps) {
         // step start from 1, we need one more item
         int[] history = new int[height + 1];
         history[0] = 1;
@@ -50,5 +54,29 @@ public class Staircasetraversal {
         history[currHeight] = result;
 
         return result;
+    }
+
+    // Solution with memory in HashMap
+    public int staircaseTraversal(int height, int maxSteps) {
+        Map<Integer, Integer> memory = new HashMap<>();
+        memory.put(0, 1);
+        memory.put(1, 1);
+
+        return computeTraversal(height, maxSteps, memory);
+    }
+
+    private int computeTraversal(int currHeight, int maxSteps, Map<Integer, Integer> memory) {
+        if (memory.containsKey(currHeight)) {
+            return memory.get(currHeight);
+        }
+
+        int totalCount = 0;
+        int step = 1;
+        while (step < Math.min(currHeight, maxSteps) + 1) {
+            totalCount += computeTraversal(currHeight - step, maxSteps, memory);
+            step++;
+        }
+        memory.put(currHeight, totalCount);
+        return totalCount;
     }
 }
