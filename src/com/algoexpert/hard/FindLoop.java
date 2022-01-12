@@ -1,8 +1,7 @@
 package com.algoexpert.hard;
 
 public class FindLoop {
-    public static void main(String[] args) {
-        int[] queries = {3, 2, 1, 2, 6};
+    public static void main(String[] args) { ;
         FindLoop a = new FindLoop();
     }
 
