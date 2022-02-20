@@ -1,6 +1,6 @@
 package com.leetcode.easy.java;
 
-import javafx.util.Pair;
+import kotlin.Pair;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -30,7 +30,7 @@ public class MinStackQuestion {
             int minValue = val;
             if (!isEmpty()) {
                 // compare current value with the last value in stack
-                minValue = Math.min(minValue, mDelegateStack.peekLast().getValue());
+                minValue = Math.min(minValue, mDelegateStack.peekLast().getSecond());
             }
             mDelegateStack.offerLast(new Pair<>(val, minValue));
         }
@@ -40,11 +40,11 @@ public class MinStackQuestion {
         }
 
         public int top() {
-            return mDelegateStack.peekLast().getKey();
+            return mDelegateStack.peekLast().getFirst();
         }
 
         public int getMin() {
-            return mDelegateStack.peekLast().getValue();
+            return mDelegateStack.peekLast().getSecond();
         }
 
         public boolean isEmpty() {
